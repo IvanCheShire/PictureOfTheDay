@@ -7,6 +7,11 @@
     <string name="settings">settings</string>
     <string name="wikipedia">Wikipedia</string>
     <string name="search">Search</string>
+    <string name="color_theme">Цветовая тема</string>
+    <string name="moon_theme">Лунная</string>
+    <string name="mars_theme">Марсианская</string>
+    <string name="night_chip">Ночь</string>
+    <string name="night_mode_tv">Ночной режим</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -1,5 +1,6 @@
 package geekbrains.material.ui.fragment
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,18 +15,26 @@ import geekbrains.material.ui.BackButtonListener
 import kotlinx.android.synthetic.main.fragment_wiki_search.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
+import javax.inject.Inject
 
 
 class WikiSearchFragment: MvpAppCompatFragment(), WikiSearchView, BackButtonListener {
+
+    init {
+        App.instance.appComponent.inject(this)
+    }
     companion object {
         fun newInstance() = WikiSearchFragment()
     }
 
-    val presenter by moxyPresenter {
-        WikiSearchPresenter().apply {
-            App.instance.appComponent.inject(this)
-        }
-    }
+    @Inject
+    @InjectPresenter
+    lateinit var presenter: WikiSearchPresenter
+
+    @ProvidePresenter
+    fun provide() = presenter
 
     lateinit var webView: WebView
 
@@ -57,6 +66,7 @@ class WikiSearchFragment: MvpAppCompatFragment(), WikiSearchView, BackButtonList
         webView.clearHistory()
         webView.settings.setJavaScriptEnabled(true)
         webView.settings.javaScriptCanOpenWindowsAutomatically = true
+        webView.visibility = View.VISIBLE
         webView.loadUrl(url)
     }
 

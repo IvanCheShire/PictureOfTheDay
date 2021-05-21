@@ -7,10 +7,8 @@ import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
-class MainPresenter: MvpPresenter<MainView>() {
-    @Inject lateinit var app: App
+class MainPresenter @Inject constructor (val app: App, val router: Router): MvpPresenter<MainView>() {
 
-    @Inject lateinit var router: Router
 
     val primaryScreen = Screens.PictureOfTheDayScreen()
 
@@ -25,6 +23,10 @@ class MainPresenter: MvpPresenter<MainView>() {
 
     fun wikiMenuItemClicked() {
         router.navigateTo(Screens.WikiSearchScreen())
+    }
+
+    fun settingsMenuItemClicked() {
+        router.navigateTo(Screens.SettingsScreen())
     }
 
 }

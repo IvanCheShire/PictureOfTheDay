@@ -19,23 +19,31 @@ import geekbrains.material.ui.App
 import geekbrains.material.ui.BackButtonListener
 import geekbrains.material.R
 import geekbrains.material.mvp.presenter.PictureOfTheDayPresenter
+import geekbrains.material.mvp.presenter.MainPresenter
 import geekbrains.material.mvp.view.PictureOfTheDayView
 import kotlinx.android.synthetic.main.bottom_sheet.*
 import kotlinx.android.synthetic.main.fragment_picture_of_the_day.*
 import kotlinx.android.synthetic.main.fragment_wiki_search.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
+import javax.inject.Inject
 
 class PictureOfTheDayFragment: MvpAppCompatFragment(), PictureOfTheDayView, BackButtonListener {
     companion object {
         fun newInstance() = PictureOfTheDayFragment()
     }
 
-    val presenter by moxyPresenter {
-        PictureOfTheDayPresenter().apply {
-            App.instance.appComponent?.inject(this)
-        }
-    }
+    @Inject
+    @InjectPresenter
+    lateinit var presenter: PictureOfTheDayPresenter
+
+    @ProvidePresenter
+    fun provide() = presenter
+
+    init {
+        App.instance.appComponent.inject(this)
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 

@@ -9,14 +9,10 @@ import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
-class PictureOfTheDayPresenter: MvpPresenter<PictureOfTheDayView>()  {
+class PictureOfTheDayPresenter @Inject constructor (val app: App, val uiScheduler: Scheduler,
+                                                    val router: Router, val pictureOfTheDayRepo: IPictureOfTheDayRepo): MvpPresenter<PictureOfTheDayView>()  {
 
-    @Inject lateinit var app: App
-    @Inject lateinit var uiScheduler: Scheduler
 
-    @Inject lateinit var router: Router
-
-    @Inject lateinit var pictureOfTheDayRepo: IPictureOfTheDayRepo
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
