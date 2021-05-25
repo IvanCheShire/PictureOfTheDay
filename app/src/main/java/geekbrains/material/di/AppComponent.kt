@@ -1,15 +1,8 @@
 package geekbrains.material.di
 
-import geekbrains.material.di.modules.ApiModule
-import geekbrains.material.di.modules.AppModule
-import geekbrains.material.di.modules.NavigationModule
-import geekbrains.material.di.modules.PictureOfTheDayModule
-import geekbrains.material.mvp.presenter.MainPresenter
-import geekbrains.material.mvp.presenter.PictureOfTheDayPresenter
-import geekbrains.material.mvp.presenter.WikiSearchPresenter
-import geekbrains.material.ui.fragment.PictureOfTheDayFragment
-import geekbrains.material.ui.fragment.WikiSearchFragment
-import geekbrains.material.ui.fragment.SettingsFragment
+import geekbrains.material.di.modules.*
+import geekbrains.material.mvp.presenter.*
+import geekbrains.material.ui.fragment.*
 import geekbrains.material.ui.activity.MainActivity
 
 import dagger.Component
@@ -21,7 +14,8 @@ import javax.inject.Singleton
     AppModule::class,
     ApiModule::class,
     PictureOfTheDayModule::class,
-    NavigationModule::class
+    NavigationModule::class,
+    EarthGalleryModule::class
 ])
 
 interface AppComponent {
@@ -32,4 +26,8 @@ interface AppComponent {
     fun inject(pictureOfTheDayFragment: PictureOfTheDayFragment)
     fun inject(wikiSearchFragment: WikiSearchFragment)
     fun inject(settingsFragment: SettingsFragment)
+    fun inject(earthGalleryFragment: EarthGalleryFragment)
+    fun inject(earthGalleryPresenter: EarthGalleryPresenter)
+    fun inject(earthPhotoFragment: EarthPhotoFragment)
+    fun inject(earthPhotoPresenter: EarthPhotoPresenter)
 }

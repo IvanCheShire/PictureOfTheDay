@@ -3,6 +3,7 @@ package geekbrains.material.di.modules
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import geekbrains.material.mvp.model.api.IEarthGallerySource
 import geekbrains.material.mvp.model.api.IPictureOfTheDaySource
 import dagger.Module
 import dagger.Provides
@@ -36,6 +37,15 @@ class ApiModule {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(IPictureOfTheDaySource::class.java)
+    @Singleton
+    @Provides
+    fun apiEarthGallery(@Named("baseUrl v1") baseUrl: String, gson: Gson, client: OkHttpClient): IEarthGallerySource = Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .client(client)
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+            .create(IEarthGallerySource::class.java)
 
     @Singleton
     @Provides
