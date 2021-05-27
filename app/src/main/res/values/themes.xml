@@ -20,6 +20,8 @@
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
             <!-- Bottom navigation -->
             <item name="bottomNavigationStyle">@style/MyBottomNavigationStyle</item>
+
+            <item name="collapsedTitleTextAppearance">?colorOnPrimary</item>
     </style>
 
         <style name="Theme.Mars" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -69,6 +71,12 @@
         <style name="MyTextInputLayout" parent = "Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <item name="boxBackgroundColor">?colorSurface</item>
             <item name="helperTextTextColor">?colorPrimaryDark</item>
-     	    </style>
+        </style>
+
+         <style name="ExpandedAppBar" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
+            <item name="android:textSize">28sp</item>
+            <item name="android:textColor">?colorOnPrimary</item>
+            <item name="android:textStyle">bold</item>
+        </style>
 
 </resources>

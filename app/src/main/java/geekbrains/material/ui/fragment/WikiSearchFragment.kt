@@ -1,5 +1,6 @@
 package geekbrains.material.ui.fragment
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.core.view.isVisible
 import geekbrains.material.R
 import geekbrains.material.mvp.presenter.WikiSearchPresenter
 import geekbrains.material.mvp.view.WikiSearchView
@@ -45,6 +47,7 @@ class WikiSearchFragment: MvpAppCompatFragment(), WikiSearchView, BackButtonList
     ): View {
         val rootView = View.inflate(context, R.layout.fragment_wiki_search, null)
         webView = rootView.findViewById<WebView>(R.id.wiki_web_view)
+        webView.setBackgroundColor(Color.TRANSPARENT)
         return rootView
     }
 
@@ -55,7 +58,9 @@ class WikiSearchFragment: MvpAppCompatFragment(), WikiSearchView, BackButtonList
         }
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     override fun showWikiPage(url: String) {
+        println("SHOW WIKI PAGE fun starts")
         webView.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                 view.loadUrl(url)
@@ -64,11 +69,13 @@ class WikiSearchFragment: MvpAppCompatFragment(), WikiSearchView, BackButtonList
         }
         webView.clearCache(true)
         webView.clearHistory()
-        webView.settings.setJavaScriptEnabled(true)
+        webView.settings.javaScriptEnabled = true
         webView.settings.javaScriptCanOpenWindowsAutomatically = true
         webView.visibility = View.VISIBLE
+        println("WEB VIEW IS VISIBLE: ${webView.isVisible}")
         webView.loadUrl(url)
     }
+
 
     override fun backPressed() = presenter.backClick()
 }

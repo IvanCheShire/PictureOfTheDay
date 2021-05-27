@@ -9,6 +9,7 @@ import coil.api.load
 import geekbrains.material.R
 import geekbrains.material.mvp.model.entity.EarthPhotoServerResponse
 import geekbrains.material.mvp.presenter.EarthPhotoPresenter
+import geekbrains.material.mvp.presenter.PresenterFactory
 import geekbrains.material.mvp.view.EarthPhotoView
 import geekbrains.material.ui.App
 import geekbrains.material.ui.BackButtonListener
@@ -18,9 +19,13 @@ import kotlinx.android.synthetic.main.fragment_picture_of_the_day.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import java.io.InputStream
+import javax.inject.Inject
 
 
 class EarthPhotoFragment  : MvpAppCompatFragment(), EarthPhotoView, BackButtonListener {
+
+    @Inject
+    lateinit var presenterFactory: PresenterFactory
 
     companion object {
         fun newInstance(earthPhotoServerResponse: EarthPhotoServerResponse) = EarthPhotoFragment().apply {
@@ -34,9 +39,8 @@ class EarthPhotoFragment  : MvpAppCompatFragment(), EarthPhotoView, BackButtonLi
 
 
     val presenter by moxyPresenter {
-        EarthPhotoPresenter(
-                this.arguments?.getParcelable<EarthPhotoServerResponse>(EARTH_PHOTO) as EarthPhotoServerResponse
-        ).apply { App.instance.appComponent.inject(this) }
+        presenterFactory.createEarthPhotoPresenter(this.arguments?.getParcelable<EarthPhotoServerResponse>(EARTH_PHOTO) as EarthPhotoServerResponse
+        )
     }
 
     init {
