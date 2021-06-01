@@ -2,27 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/bottom_sheet_container"
+    android:id="@+id/pod_description_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?colorSurface"
-    app:behavior_hideable="true"
-    app:behavior_peekHeight="50dp"
-    android:visibility="gone"
-    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
-
-    <View
-        android:id="@+id/bottom_sheet_line"
-        android:layout_width="25dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="5dp"
-        android:background="#663b4351"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:background="?colorSurface">
 
     <TextView
-        android:id="@+id/bottom_sheet_description_header"
+        android:id="@+id/pod_description_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -32,12 +18,12 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_line"
+        app:layout_constraintTop_toBottomOf="parent"
         tools:text="Two Clusters and a Comet"
         android:fontFamily="@font/p_t_serif_bold"/>
 
     <TextView
-        android:id="@+id/bottom_sheet_description"
+        android:id="@+id/pod_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="10dp"
