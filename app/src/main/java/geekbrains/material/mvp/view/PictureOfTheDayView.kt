@@ -11,13 +11,13 @@ interface PictureOfTheDayView: MvpView {
 
     @Skip
     fun showError(message: String?)
-
     fun showDescription(description: String?)
     fun showTitle(title: String?)
     fun showVideo(url: String)
-
     fun showWebView()
     fun hideImageView()
     fun showImageView()
     fun hideWebView()
+    fun showComponents()
+    fun hideComponents()
 }

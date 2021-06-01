@@ -15,7 +15,7 @@ import geekbrains.material.ui.App
 import geekbrains.material.ui.BackButtonListener
 import geekbrains.material.ui.utils.toast
 import kotlinx.android.synthetic.main.fragment_earth_photo.*
-import kotlinx.android.synthetic.main.fragment_picture_of_the_day.*
+import kotlinx.android.synthetic.main.fragment_picture_of_the_day_start.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import java.io.InputStream

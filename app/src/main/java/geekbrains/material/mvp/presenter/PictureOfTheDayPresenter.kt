@@ -12,7 +12,7 @@ import javax.inject.Inject
 class PictureOfTheDayPresenter @Inject constructor (val app: App, val uiScheduler: Scheduler,
                                                     val router: Router, val pictureOfTheDayRepo: IPictureOfTheDayRepo): MvpPresenter<PictureOfTheDayView>()  {
 
-
+    private var show = false
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -64,5 +64,17 @@ class PictureOfTheDayPresenter @Inject constructor (val app: App, val uiSchedule
         router.exit()
         return true
     }
+    fun onLayoutClicked() {
+        if (show) hideComponents() else showComponents()
+    }
 
+    private fun showComponents() {
+        show = true
+        viewState.showComponents()
+    }
+
+    private fun hideComponents() {
+        show = false
+        viewState.hideComponents()
+    }
 }
