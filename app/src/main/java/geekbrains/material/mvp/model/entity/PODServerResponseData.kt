@@ -1,4 +1,4 @@
-package geekbarains.material.ui.picture
+package geekbrains.material.ui.picture
 
 import com.google.gson.annotations.SerializedName
 
