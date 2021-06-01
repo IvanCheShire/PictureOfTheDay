@@ -16,6 +16,12 @@
     <string name="earth">Земля</string>
     <string name="settings">Настройки</string>
     <string name="tap_for_info">Описание</string>
+    <string name="notes">Список заметок</string>
+    <string name="notes_header">Список заметок</string>
+    <string name="note_title">Новая заметка</string>
+    <string name="note_body">Описание</string>
+    <string name="save_btn">Сохранить</string>
+    <string name="cancel_btn">Отмена</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
