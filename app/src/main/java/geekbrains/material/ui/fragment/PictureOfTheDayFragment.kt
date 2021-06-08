@@ -1,6 +1,15 @@
 package geekbrains.material.ui.fragment
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
+import android.text.style.RelativeSizeSpan
 import android.transition.ChangeBounds
 import android.transition.TransitionManager
 import android.view.LayoutInflater
@@ -11,6 +20,7 @@ import android.view.animation.LinearInterpolator
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.isGone
 import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -55,7 +65,11 @@ class PictureOfTheDayFragment: MvpAppCompatFragment(), PictureOfTheDayView, Back
 
 
         override fun init() {
+            tap.setOnClickListener { presenter.onLayoutClicked()}
+            pod_description.setOnClickListener { presenter.onLayoutClicked()}
+            pod_description_header.setOnClickListener { presenter.onLayoutClicked()}
             pod_layout.setOnClickListener { presenter.onLayoutClicked()}
+            pod_description.setMovementMethod(LinkMovementMethod.getInstance());
         }
 
     override fun showPicture(url: String) {
@@ -70,8 +84,14 @@ class PictureOfTheDayFragment: MvpAppCompatFragment(), PictureOfTheDayView, Back
         toast(message)
     }
 
-    override fun showDescription(description: String?) {
-        pod_description.setText(description)
+        override fun showDescription(
+                description: CharSequence?,
+                termsToDecorateList: List<PictureOfTheDayPresenter.TermToDecorate>?
+        ) {
+            val spannable = SpannableString(description)
+            createDropCap(spannable)
+            val decoratedDescription = underlineTerms(spannable, termsToDecorateList)
+            pod_description.text = decoratedDescription
     }
 
     override fun showTitle(title: String?) {
@@ -120,6 +140,33 @@ class PictureOfTheDayFragment: MvpAppCompatFragment(), PictureOfTheDayView, Back
         transition.duration = 600
         TransitionManager.beginDelayedTransition(pod_layout, transition)
         constraintSet.applyTo(pod_layout)
+    }
+        fun underlineTerms(spannable: SpannableString, termsToDecorateList: List<PictureOfTheDayPresenter.TermToDecorate>?): SpannableString {
+            if (termsToDecorateList != null) {
+                for(term: PictureOfTheDayPresenter.TermToDecorate in termsToDecorateList){
+                    spannable.setSpan(
+                            CustomClickableSpan(term.term, requireActivity()), term.indexStart, term.indexEnd, Spanned.SPAN_INCLUSIVE_INCLUSIVE
+                    )
+                }
+            }
+            return spannable
+        }
+
+        fun createDropCap(spannable: SpannableString) {
+            spannable.setSpan(RelativeSizeSpan(2f), 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
+        }
+
+    }
+
+    class CustomClickableSpan(val term: String, val context: Context): ClickableSpan() {
+        override fun onClick(widget: View) {
+            openWiki()
+        }
+        private fun openWiki(){
+            val urlIntent = Intent(Intent.ACTION_VIEW)
+            urlIntent.data = Uri.parse("https://en.wikipedia.org/wiki/$term")
+            startActivity(context, urlIntent, null)
+        }
     }
 
 }
